@@ -126,13 +126,13 @@ switch event. Using our approach outlined in [insert DOI], we filter each candid
 4. All four unique nucleotides within the ②→③ fragment
 5. A threshold on the maximum number of deletions in the mutation cluster
 
-An example filtering script `filter_csv.py` is included here to filter based on this criteria:
+An example script `filter_csv.py` is included here to filter based on this criteria:
 
 ```sh
 python filter_csv.py aln_scanned.csv
 ```
 
-This will generate one file `aln_events.csv`, which contains the events from `aln_scanned.csv` that pass our thresholds:
+This will generate one file `aln_events.csv`, which contains any candidate events from `aln_scanned.csv` that pass our thresholds (one event in this case):
 ```sh
 cat aln_events.csv
 
