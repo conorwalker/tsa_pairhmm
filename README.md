@@ -10,7 +10,7 @@ by Conor R. Walker, Aylwyn Scally, Nicola De Maio, and Nick Goldman </br>
 DOI: [insert DOI]
 
 Code in this reposistory is modified from the four-point aligner (FPA) available here: https://github.com/ariloytynoja/fpa. Compilation and
-usage is the same as for the FPA.
+usage is the same as for the FPA. Developed and tested using Red Hat Enterprise Linux version 7.3.
 
 ---
 
