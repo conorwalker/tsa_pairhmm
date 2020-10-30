@@ -224,7 +224,7 @@ class TSApHMM
     void arg_error()
     {
         stringstream ss;
-        ss<< "\nMany-to-One Bidirectional Alignment pairHMM\ncommand-line options\n" << desc << "\n";
+        ss<< "\nTemplate switch alignment pairHMM\ncommand-line options\n" << desc << "\n";
         cout<<ss.str();
         exit(1);
     }
