@@ -26,7 +26,7 @@ make
 
 **Input**
 
-A FASTA file (e.g. `aln.fa`) which contains a pairwise alignment between two nucleotide sequences, in which the
+A FASTA file (e.g. `aln.fa`) which contains a pairwise alignment of two nucleotide sequences, in which the
 assumed descendant sequence is the first record and the assumed ancestral sequence is the second record, for example:
 
 ```
@@ -43,13 +43,11 @@ Whenever a mutation cluster is found, a local region around this mutation cluste
 unidirectional and template switch pairHMMs, following the procedure described in the Methods and Supplementary
 algorithms sections of [insert DOI]. 
 
-To identify and re-align all mutation clusters within `aln.fa` under both pairHMMs, we use:
+To identify and re-align all mutation clusters within `aln.fa` under both pairHMMs, and create a CSV file `aln_scanned.csv` which contains a header line followed by one line per re-aligned mutation cluster. we use:
 
 ```sh
 ./tsa_pairhmm --scan --pair aln.fa > aln_scanned.csv
 ```
-
-This creates a CSV file `aln_scanned.csv`, containing a header line followed by one line per re-aligned mutation cluster.
 
 **Output**
 
@@ -57,7 +55,8 @@ For each mutation cluster, the associated line in `aln_scanned.csv` contains the
 
 ```
 chrom                   Chromosome
-clus_start_chrom        Chromosome position for the start of the mutation cluster (based on information in the input FASTA headers)
+clus_start_chrom        Chromosome position for the start of the mutation cluster
+                        (based on information in the input FASTA headers)
 clus_start_align        Pairwise alignment position for the start of the mutation cluster
 clust_start1            Starting position of the cluster in the descendant sequence
 clust_end1              End position of the cluster in the descendant sequence
@@ -83,7 +82,8 @@ clus_del                Deletions in the mutation cluster
 clus_mis                Mismatches in the mutation cluster
 fwd_score               Unidirectional pairHMM log-probability score (in last i,j)
 ts_score_local          TSA pairHMM log-probability, i.e. max(M3(•,m), I3(•,m), D3(•,m)) 
-ts_score_global         Global TSA pairHMM log-probability i.e. max(M3(n,m), I3(n,m), D3(n,m)) (not used for any calculations)
+ts_score_global         Global TSA pairHMM log-probability i.e. max(M3(n,m), I3(n,m), D3(n,m))
+                        (not used for any calculations)
 ts_ref_seq_len          Ancestral sequence (x) length in the TSA pairHMM alignment
 ts_qry_seq_len          Descendant sequence (y) length in the TSA pairHMM alignment
 frag_L1_size            Length of L->1
