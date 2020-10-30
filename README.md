@@ -22,8 +22,6 @@ cd tsa_pairhmm
 make
 ```
 
----
-
 ### Typical usage
 
 **Input**
