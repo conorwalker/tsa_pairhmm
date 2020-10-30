@@ -71,7 +71,8 @@ ident_down              Identity of the region downstream of the re-aligned muta
 ident_inv               TSA pairHMM identity
 ident_fwd               Unidirectional pairHMM identity
 ident_epo               Input alignment identity
-masked                  Boolean: is the 2->3 fragment from a masked region? (0 = not masked, 1 = masked)
+masked                  Boolean: is the 2->3 fragment from a masked region?
+                        (0 = not masked, 1 = masked)
 sum_ins                 Sum of insertions in the re-aligned region
 sum_del                 Sum of deletions in the re-aligned region
 sum_mis                 Sum of mismatches in the re-aligned region
