@@ -9,10 +9,10 @@ _Short-range template switching in great ape genomes explored using a pair hidde
 by Conor R. Walker, Aylwyn Scally, Nicola De Maio, and Nick Goldman <br/>
 DOI: [insert DOI]
 
----
-
 Code in this reposistory is modified from the four-point aligner (FPA) available here: https://github.com/ariloytynoja/fpa. Compilation and
 usage is the same as for the FPA.
+
+---
 
 ### Compilation
 
@@ -21,6 +21,8 @@ git clone https://github.com/conorwalker/tsa_pairhmm.git
 cd tsa_pairhmm
 make
 ```
+
+---
 
 ### Typical usage
 
