@@ -94,8 +94,8 @@ frag_4R_size            Length of ④→Ⓡ
 
 **Assessing candidate events for significance and alignment quality**
 
-Many of the identified mutation clusters with some associated output will not have arisen due to template
-switch events. Using the approach outlined in [insert DOI], we filter each candidate event based on:
+Many of the identified mutation clusters with output in `aln_scanned.csv` will not have arisen due to a template
+switch event. Using the approach outlined in [insert DOI], we filter each candidate event line based on:
 
 1. Statistical significance
 2. A threshold on the per-base template switch alignment quality 
