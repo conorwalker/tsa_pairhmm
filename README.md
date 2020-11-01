@@ -9,8 +9,9 @@ _Short-range template switching in great ape genomes explored using a pair hidde
 by Conor R. Walker, Aylwyn Scally, Nicola De Maio, and Nick Goldman </br>
 DOI: [insert DOI]
 
-Code in this reposistory is modified from the four-point aligner (FPA) available here: https://github.com/ariloytynoja/fpa. Compilation and
-usage is the same as for the FPA. Developed and tested using Red Hat Enterprise Linux version 7.3.
+
+Code in this reposistory is modified from the four-point aligner (FPA) available here: https://github.com/ariloytynoja/fpa.
+Compilation and usage is the same as for the FPA. Developed and tested using Red Hat Enterprise Linux version 7.3.
 
 ---
 
@@ -89,20 +90,20 @@ sp4_ref                 Ancestral switch point ④ position
 iden_up                 Identity of the region upstream of the re-aligned mutation cluster
 ident_rep               ②→③ fragment identity
 ident_down              Identity of the region downstream of the re-aligned mutation cluster
-ident_inv               TSA pairHMM identity
-ident_fwd               Unidirectional pairHMM identity
+ident_inv               TSA pairHMM alignment identity
+ident_fwd               Unidirectional pairHMM alignment identity
 ident_epo               Input alignment identity
 masked                  Boolean: is the ②→③ fragment from a masked region?
                         (0 = not masked, 1 = masked)
-sum_ins                 Sum of insertions in the re-aligned region
-sum_del                 Sum of deletions in the re-aligned region
-sum_mis                 Sum of mismatches in the re-aligned region
+sum_ins                 Count of insertions in the TSA pairHMM alignment
+sum_del                 Count of deletions in the TSA pairHMM alignment
+sum_mis                 Count of mismatches in the TSA pairHMM alignment
 sum_nuc                 Number of unique nucleotides in the ②→③ fragment
 CpG                     CpG content of re-aligned region
-clus_ins                Insertions in the mutation cluster
-clus_del                Deletions in the mutation cluster
-clus_mis                Mismatches in the mutation cluster
-fwd_score               Unidirectional pairHMM log-probability score (in last i,j)
+clus_ins                Count of insertions in the mutation cluster
+clus_del                Count of deletions in the mutation cluster
+clus_mis                Count of mismatches in the mutation cluster
+fwd_score               Unidirectional pairHMM log-probability, i.e. max(M(n,m), I(n,m), D(n,m))
 ts_score_local          TSA pairHMM log-probability, i.e. max(M3(•,m), I3(•,m), D3(•,m)) 
 ts_score_global         Global TSA pairHMM log-probability i.e. max(M3(n,m), I3(n,m), D3(n,m))
                         (not used for any calculations)
@@ -126,13 +127,13 @@ switch event. Using our approach outlined in [insert DOI], we filter each candid
 4. All four unique nucleotides within the ②→③ fragment
 5. A threshold on the maximum number of deletions in the mutation cluster
 
-An example script `filter_csv.py` is included here to filter based on this criteria:
+An example filtering script `filter_csv.py` is included here to filter based on this criteria:
 
 ```sh
 python filter_csv.py aln_scanned.csv
 ```
 
-This will generate one file `aln_events.csv`, which contains any candidate events from `aln_scanned.csv` that pass our thresholds (one event in this case):
+This will generate one file `aln_events.csv`, which contains the events from `aln_scanned.csv` that pass our thresholds (one in this example):
 ```sh
 cat aln_events.csv
 
@@ -141,7 +142,7 @@ cat aln_events.csv
 <br/>
 
 
-**Visualsing template switch alignments**
+**Visualising template switch alignments**
 
 The event output contained within the above CSV files can be visualised using:
 ```sh
