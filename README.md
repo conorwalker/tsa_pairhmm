@@ -7,7 +7,7 @@ This repository contains code for the pairHMMs presented in the manuscript/prepr
 
 _Short-range template switching in great ape genomes explored using a pair hidden Markov model_ </br>
 by Conor R. Walker, Aylwyn Scally, Nicola De Maio, and Nick Goldman </br>
-DOI: [insert DOI]
+DOI: https://doi.org/10.1101/2020.11.09.374694
 
 
 Code in this reposistory is modified from the four-point aligner (FPA) available here: https://github.com/ariloytynoja/fpa.
