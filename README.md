@@ -5,7 +5,7 @@
 
 This repository contains code for the pairHMMs presented in the paper:
 
-_Short-range template switching in great ape genomes explored using a pair hidden Markov model_ </br>
+_Short-range template switching in great ape genomes explored using pair hidden Markov models_ </br>
 by Conor R. Walker, Aylwyn Scally, Nicola De Maio, and Nick Goldman </br>
 DOI: https://doi.org/10.1371/journal.pgen.1009221
 
