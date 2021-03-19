@@ -3,11 +3,11 @@
 ## TSA pairHMM: Template switch alignment pair hidden Markov model
 
 
-This repository contains code for the pairHMMs presented in the manuscript/preprint:
+This repository contains code for the pairHMMs presented in the paper:
 
 _Short-range template switching in great ape genomes explored using a pair hidden Markov model_ </br>
 by Conor R. Walker, Aylwyn Scally, Nicola De Maio, and Nick Goldman </br>
-DOI: https://doi.org/10.1101/2020.11.09.374694
+DOI: https://doi.org/10.1371/journal.pgen.1009221
 
 
 Code in this reposistory is modified from the four-point aligner (FPA) available here: https://github.com/ariloytynoja/fpa.
@@ -44,7 +44,7 @@ ATCTGGAA...
 Mutation clusters within `aln.fa` are defined as >=2 nucleotide (nt) differences within a 10nt sliding window.
 Whenever a mutation cluster is found, a local region around this mutation cluster is re-aligned under the
 unidirectional and template switch pairHMMs, following the procedure described in the Methods and Supplementary
-algorithms sections of [insert DOI]. 
+algorithms sections of https://doi.org/10.1371/journal.pgen.1009221. 
 
 To identify and re-align all mutation clusters within `aln.fa` under both pairHMMs, we use:
 
@@ -119,7 +119,7 @@ frag_4R_size            Length of ④→Ⓡ
 **Assessing candidate events for significance and alignment quality**
 
 Many of the mutation clusters re-aligned and output to `aln_scanned.csv` will not have arisen due to a template
-switch event. Using our approach outlined in [insert DOI], we filter each candidate event line based on:
+switch event. Using our approach outlined in https://doi.org/10.1371/journal.pgen.1009221, we filter each candidate event line based on:
 
 1. Statistical significance
 2. A threshold on the per-base template switch alignment quality 
