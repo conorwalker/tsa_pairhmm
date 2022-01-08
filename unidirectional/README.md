@@ -24,6 +24,7 @@ A FASTA file (e.g. `tst_seqs.fa` included here) which contains a pair of nucleot
 <br/>
 
 **Output**
+
 Return only the log-probability of the alignment.
 
 ```sh
