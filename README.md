@@ -112,7 +112,7 @@ ts_qry_seq_len          Descendant sequence (y) length in the TSA pairHMM alignm
 frag_L1_size            Length of Ⓛ→①
 frag_23_size            Length of ②→③
 frag_4R_size            Length of ④→Ⓡ
-logprob_per_base_minus_ts          (ts_score_local-(*_1->M2->*_3)) / alignment length
+logprob_per_base_minus_ts          (ts_score_local-(*_1->M_2->*_3)) / alignment length
 ```
 
 <br/>
