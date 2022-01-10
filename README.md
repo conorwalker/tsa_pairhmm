@@ -171,4 +171,5 @@ Template switch alignment (log-probability: -16.8)
 ---
 
 **Update (10/01/2022)**
+
 The final value in the CSV output is now the log-probability of the template switch alignment with the \*\_1->M2->\*\_3 transition subtracted (i.e. from any subscript 1 state to M2, and from M2 to any subscript 3 state), divided by the alignment length. Filter script updated accordingly. This may be helpful for creating a "per-base" log-probability threshold for significant template switch alignments, as it allows the TSA pairHMM per-base log-probabilities to be related to a sample of unidirectional alignment per-base log-probabilities (see S8 Fig in Walker *et al.* 2021).
