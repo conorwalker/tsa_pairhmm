@@ -30,7 +30,7 @@ def main():
     logprob_thresh = 9
 
     # per base log probability threshold, determined using random
-    # samples of Human/Chimp alignments
+    # samples of Human/Chimp alignments; see S8 Fig. of Walker et al. (2021)
     per_base_logprob_thresh = -0.148574
 
     # input CSV
@@ -58,10 +58,11 @@ def main():
             # log of the ratio between the pairHMM probabilities
             log_probability_ratio = tsa_logprob - uni_logprob
 
-            # length of the TSA pairHMM alignment
-            tsa_align_len = float(pairhmm_output[29])
-            # 14.78259 = (M1->M2) + (M2->M3)
-            ts_per_base_logprob = (tsa_logprob + 14.78259) / tsa_align_len
+            # (tsa_logprob - (*_1->M2->*_3)) / template switch alignment length.
+            # used to relate the template switch alignment log-probability
+            # to the "per-base" quality threshold determined by sampling
+            # unidirectional alignments. see S8 Fig. of Walker et al. (2021)
+            ts_per_base_logprob = float(pairhmm_output[33])
 
             # sum of unique nucleotides in the 2->3 fragment
             sum_nuc = int(pairhmm_output[20])

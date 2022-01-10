@@ -61,16 +61,16 @@ The above command creates a CSV file `aln_scanned.csv` which contains a header l
 ```sh
 head aln_scanned.csv
 
-chrom,clus_start_chrom,clus_start_align,clust_start1,clust_end1,sp1_qry,sp1_ref,sp2_ref,sp3_ref,sp4_ref,iden_up,ident_rep,ident_down,ident_inv,ident_fwd,ident_epo,masked,sum_ins,sum_del,sum_mis,sum_nuc,CpG,clus_ins,clus_del,clus_mis,fwd_score,ts_score_local,ts_score_global,ts_ref_seq_len,ts_qry_seq_len,frag_L1_size,frag_23_size,frag_4R_size
-10,123199418,601,601,603,602,602,740,740,605,1,1,1,1,0.988,0.976,0,0,1,0,1,0,0,1,1,-11,-15.4,-27.7,282,81,40,1,39
-10,123201804,2988,2987,2994,2960,2961,3126,3126,2963,1,1,0.95,0.96,0.94,0.94,0,0,0,1,1,0,0,0,2,-18.7,-27.4,-39.4,282,82,9,1,40
-10,123201987,3171,3170,3173,3171,3172,3302,3301,3175,1,1,1,1,0.975,0.976,3,0,0,2,2,0,0,0,2,-12.7,-15.5,-27.8,282,82,40,2,39
-10,123202034,3218,3217,3221,3218,3219,3336,3334,3223,1,1,1,1,0.976,0.976,3,0,0,2,2,0,0,0,2,-12.7,-15.6,-28,282,82,40,3,39
-10,123202123,3307,3306,3314,3307,3308,3452,3452,3310,1,1,0.975,0.987,0.974,0.974,3,0,0,1,1,0,0,0,2,-12.7,-21.4,-33.4,282,82,36,1,40
-10,123202787,3971,3970,3972,3966,3967,4025,4025,3970,1,1,1,1,0.987,0.962,3,0,1,0,1,0,1,2,0,-11,-15.4,-27.7,282,81,36,1,40
-10,123202852,4038,4035,4041,4041,4043,4137,4123,4146,1,0.933,1,0.987,0.473,0.511,3,0,87,-1,2,0,0,86,1,-25.6,-22.9,-35.2,371,84,40,15,23
-10,123202871,4143,4054,4056,4041,4003,4137,4123,4146,1,0.933,1,0.982,0.671,0.947,3,0,27,-1,2,0,0,1,1,-22.3,-22.2,-34.5,282,55,1,15,39
-10,123203007,4280,4190,4193,4186,4275,4413,4413,4275,1,1,1,1,0.974,0.974,3,2,0,0,1,0,2,0,0,-13.8,-15.4,-27.7,280,82,36,1,40
+chrom,clus_start_chrom,clus_start_align,clust_start1,clust_end1,sp1_qry,sp1_ref,sp2_ref,sp3_ref,sp4_ref,iden_up,ident_rep,ident_down,ident_inv,ident_fwd,ident_epo,masked,sum_ins,sum_del,sum_mis,sum_nuc,CpG,clus_ins,clus_del,clus_mis,fwd_score,ts_score_local,ts_score_global,ts_ref_seq_len,ts_qry_seq_len,frag_L1_size,frag_23_size,frag_4R_size,logprob_per_base_minus_ts
+10,123199418,601,601,603,602,602,740,740,605,1,1,1,1,0.988,0.976,0,0,1,0,1,0,0,1,1,-11,-15.4,-27.7,282,81,40,1,39,-1.69e+159
+10,123201804,2988,2987,2994,2960,2961,3126,3126,2963,1,1,0.95,0.96,0.94,0.94,0,0,0,1,1,0,0,0,2,-18.7,-27.4,-39.4,282,82,9,1,40,-0.155
+10,123201987,3171,3170,3173,3171,3172,3302,3301,3175,1,1,1,1,0.975,0.976,3,0,0,2,2,0,0,0,2,-12.7,-15.5,-27.8,282,82,40,2,39,-0.0101
+10,123202034,3218,3217,3221,3218,3219,3336,3334,3223,1,1,1,1,0.976,0.976,3,0,0,2,2,0,0,0,2,-12.7,-15.6,-28,282,82,40,3,39,-0.0114
+10,123202123,3307,3306,3314,3307,3308,3452,3452,3310,1,1,0.975,0.987,0.974,0.974,3,0,0,1,1,0,0,0,2,-12.7,-21.4,-33.4,282,82,36,1,40,-0.0819
+10,123202787,3971,3970,3972,3966,3967,4025,4025,3970,1,1,1,1,0.987,0.962,3,0,1,0,1,0,1,2,0,-11,-15.4,-27.7,282,81,36,1,40,-0.00886
+10,123202852,4038,4035,4041,4041,4043,4137,4123,4146,1,0.933,1,0.987,0.473,0.511,3,0,87,-1,2,0,0,86,1,-25.6,-22.9,-35.2,371,84,40,15,23,-0.0975
+10,123202871,4143,4054,4056,4041,4003,4137,4123,4146,1,0.933,1,0.982,0.671,0.947,3,0,27,-1,2,0,0,1,1,-22.3,-22.2,-34.5,282,55,1,15,39,-0.144
+10,123203007,4280,4190,4193,4186,4275,4413,4413,4275,1,1,1,1,0.974,0.974,3,2,0,0,1,0,2,0,0,-13.8,-15.4,-27.7,280,82,36,1,40,-0.00886
 ```
 
 For each mutation cluster, the associated line in `aln_scanned.csv` contains the following information:
@@ -112,6 +112,7 @@ ts_qry_seq_len          Descendant sequence (y) length in the TSA pairHMM alignm
 frag_L1_size            Length of Ⓛ→①
 frag_23_size            Length of ②→③
 frag_4R_size            Length of ④→Ⓡ
+logprob_per_base_minus_ts          (ts_score_local-(*_1->M2->*_3)) / alignment length
 ```
 
 <br/>
@@ -137,7 +138,7 @@ This will generate one file `aln_events.csv`, which contains the events from `al
 ```sh
 cat aln_events.csv
 
-10,123237102,40311,38285,38298,38286,30379,30396,30385,30389,1,1,1,1,0.79,0.902,0,12,9,0,4,2,3,0,6,-38.8,-16.8,-29.1,289,92,40,12,39
+10,123237102,40311,38285,38298,38286,30379,30396,30385,30389,1,1,1,1,0.79,0.902,0,12,9,0,4,2,3,0,6,-38.8,-16.8,-29.1,289,92,40,12,39,-0.0213
 ```
 <br/>
 
@@ -166,3 +167,8 @@ Template switch alignment (log-probability: -16.8)
  CAAACTCCATTTTTACTGACCATGCTAACACACACCCAAA|TTATGCTCTTTG|GAGCATAATTCTTGTACGTTATTGCCACATACAGGATGTC
  CAAACTCCATTTTTACTGACCATGCTAACACACACCCAAA|TTATGCTCTTTG|GAGCATAATTCTTGTACGTTATTGCCACATACAGGATGTC
 ```
+
+---
+
+**Update (10/01/2022)**
+The final value in the CSV output is now the log-probability of the template switch alignment with the \*\_1->M2->\*\_3 transition subtracted (i.e. from any subscript 1 state to M2, and from M2 to any subscript 3 state), divided by the alignment length. Filter script updated accordingly. This may be helpful for creating a "per-base" log-probability threshold for significant template switch alignments, as it allows the TSA pairHMM per-base log-probabilities to be related to a sample of unidirectional alignment per-base log-probabilities (see S8 Fig in Walker *et al.* 2021).

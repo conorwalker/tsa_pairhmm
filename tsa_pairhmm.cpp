@@ -91,6 +91,11 @@ class TSApHMM
     int ts_qry_seq_len;
     int ts_ref_seq_len;
 
+    // penalty of transitioning between template switch states
+    double ts_penalty;
+    int m1_to_m2_state;
+    int m2_to_m3_state;
+
     struct Fasta_entry
     {
         string name;
@@ -324,7 +329,7 @@ class TSApHMM
 
     /********************    alignment stuff    ******************************/
 
-    void build_indeces(string *s1,string *s2)
+    void build_indices(string *s1,string *s2)
     {
 
         if(s1->length() != s2->length())
@@ -1236,10 +1241,12 @@ class TSApHMM
                     c_start = rindex1.at(clus_start1);
 
                 if(verbose)
-                    cout<<"chrom,clus_start_chrom,clus_start_align,clust_start1,clust_end1,sp1_qry,sp1_ref,sp2_ref,sp3_ref,sp4_ref,iden_up,ident_rep,ident_down,ident_inv,ident_fwd,ident_epo,masked,sum_ins,sum_del,sum_mis,sum_nuc,CpG,clus_ins,clus_del,clus_mis,fwd_score,ts_score_local,ts_score_global,ts_ref_seq_len,ts_qry_seq_len,frag_L1_size,frag_23_size,frag_4R_size\n";
+                    cout<<"chrom,clus_start_chrom,clus_start_align,clust_start1,clust_end1,sp1_qry,sp1_ref,sp2_ref,sp3_ref,sp4_ref,iden_up,ident_rep,ident_down,ident_inv,ident_fwd,ident_epo,masked,sum_ins,sum_del,sum_mis,sum_nuc,CpG,clus_ins,clus_del,clus_mis,fwd_score,ts_score_local,ts_score_global,ts_ref_seq_len,ts_qry_seq_len,frag_L1_size,frag_23_size,frag_4R_size,logprob_per_base_minus_ts\n";
                 cout<<chrom<<","<<chrom_start+clus_start1<<","<<c_start<<","<<clus_start1<<","<<clus_end1<<","<<points->at(0).i<<","<<points->at(0).j<<","<<points->at(1).j<<","<<points->at(2).j<<","<<points->at(3).j<<","
                     <<up_ident<<","<<repeat_ident<<","<<down_ident<<","<<inv_ident<<","<<fwd_ident<<","<<epo_ident<<","<<mask_state<<","<<sum_ins-inv_sum_ins<<","<<sum_del-inv_sum_del<<","<<sum_mis-inv_sum_mis<<","<<sumNuc<<","
-                    <<CpG<<","<<clus_ins<<","<<clus_del<<","<<clus_mis<<","<<fwd_sco<<","<<ts_sco<<","<<traceback_max_sco<<","<<ts_ref_seq_len<<","<<ts_qry_seq_len<<","<<f1_size<<","<<f2_size<<","<<f3_size<<"\n";
+                    <<CpG<<","<<clus_ins<<","<<clus_del<<","<<clus_mis<<","<<fwd_sco<<","<<ts_sco<<","<<traceback_max_sco<<","<<ts_ref_seq_len<<","<<ts_qry_seq_len<<","<<f1_size<<","<<f2_size<<","<<f3_size<<","<<ts_penalty<<"\n";
+                // reset ts_penalty for printing next alignment
+                ts_penalty=0;
             }
         }
         else
@@ -1752,7 +1759,6 @@ class TSApHMM
             bool debug_matrix = arg_is("debug");
             bool last_match = arg_is("last-match");
             bool debug_score_matrix = arg_is("debug_scores");
-
 
             if(debug_matrix)
             {   
@@ -2419,7 +2425,7 @@ class TSApHMM
 
                         points->at(2).i = start1+i;
                         points->at(2).j = start2+j;
-
+    
                         ptr_found = true;
                         break;
                     }
@@ -2434,6 +2440,9 @@ class TSApHMM
                     exit(0);
                 }
             }
+           
+            // store model state when transitioning between m2 and m3
+            m2_to_m3_state=current;
             
             if(!ptr_found)
             {
@@ -2465,6 +2474,8 @@ class TSApHMM
                 else
                 {
                     current = jump_mat(i,j);
+                    // store model state when transitioning between m2 and m1
+                    m1_to_m2_state=current;
                     if(current==1) {
                         current_ptr = &ts_ptr1;
                     } else if(current==2) {
@@ -2485,7 +2496,6 @@ class TSApHMM
 
                     points->at(0).i = start1+i;
                     points->at(0).j = start2+j;
-
                     ptr_found = true;
                     break;
                 }
@@ -2496,7 +2506,7 @@ class TSApHMM
                 cout<<"backtracking 2nd path failed. exiting.\n";
                 exit(0);
             }
-            
+           
             //mat1_traceback
             for(;i>=0 || j>=0;)
             {
@@ -2504,7 +2514,7 @@ class TSApHMM
                 c.matrix = 1;
                 c.pos_x = start1+i;
                 c.pos_y = start2+j;
-                
+
                 if(current==1)
                 {
                     if((*current_ptr)(i,j) == match) {
@@ -2600,6 +2610,18 @@ class TSApHMM
                     exit(0);
                 }
             }
+            // calculate penalty of *_1 -> M2 -> *_3
+            if(m1_to_m2_state == 1) {
+                ts_penalty += m1_to_m2;
+            } else {
+                ts_penalty += i1d1_to_m2;
+            }
+            if(m1_to_m2_state == 1) {
+                ts_penalty += m2_to_m3;
+            } else {
+                ts_penalty += m2_to_i3d3;
+            }
+            ts_penalty = ( ts_sco - ts_penalty ) / ts_qry_seq_len;
         }
 
         /********************    alignment itself   ******************************/
@@ -2631,7 +2653,7 @@ class TSApHMM
             }
 
             if(not verbose)
-                cout<<"chrom,clus_start_chrom,clus_start_align,clust_start1,clust_end1,sp1_qry,sp1_ref,sp2_ref,sp3_ref,sp4_ref,iden_up,ident_rep,ident_down,ident_inv,ident_fwd,ident_epo,masked,sum_ins,sum_del,sum_mis,sum_nuc,CpG,clus_ins,clus_del,clus_mis,fwd_score,ts_score_local,ts_score_global,ts_ref_seq_len,ts_qry_seq_len,frag_L1_size,frag_23_size,frag_4R_size\n";
+                cout<<"chrom,clus_start_chrom,clus_start_align,clust_start1,clust_end1,sp1_qry,sp1_ref,sp2_ref,sp3_ref,sp4_ref,iden_up,ident_rep,ident_down,ident_inv,ident_fwd,ident_epo,masked,sum_ins,sum_del,sum_mis,sum_nuc,CpG,clus_ins,clus_del,clus_mis,fwd_score,ts_score_local,ts_score_global,ts_ref_seq_len,ts_qry_seq_len,frag_L1_size,frag_23_size,frag_4R_size,logprob_per_base_minus_ts\n";
 
             int max_length = arg_get("max-event-length").as<int>();
             vector<pair<int,int> > clusters;
@@ -3063,7 +3085,7 @@ public:
 
         if(arg_is("pair"))
         {
-            this->build_indeces(&qry.sequence,&ref.sequence);
+            this->build_indices(&qry.sequence,&ref.sequence);
             this->build_sequences(&qry.sequence,&ref.sequence);
 
             if(arg_is("scan"))
